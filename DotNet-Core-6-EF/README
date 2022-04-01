@@ -1,0 +1,1 @@
+The files here contain the code required to get an Entity Framework model, DbContext and database connection working with a .NET Core 6 MVC application.
