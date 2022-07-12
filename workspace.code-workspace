@@ -1,0 +1,54 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+    ],
+    "settings": {
+        "files.defaultLanguage": "markdown",
+        "foam.edit.linkReferenceDefinitions": "off",
+        "foam.openDailyNote.directory": "journal",
+        "foam.openDailyNote.titleFormat": "fullDate",
+        "pasteImage.path": "${projectRoot}/attachments",
+        "pasteImage.showFilePathConfirmInputBox": true,
+		"workbench.colorCustomizations": {
+			"titleBar.activeForeground": "#99ff99",
+			"titleBar.inactiveForeground": "#000000CC",
+			"titleBar.activeBackground": "#000000",
+            "titleBar.border": "#99ff99",
+			"titleBar.inactiveBackground": "#555555",
+            "toolbar.hoverBackground": "#99ff99",
+            "toolbar.hoverForeground": "#000000",
+            "menu.border": "#00cc00",
+            "menu.selectionBackground": "#00cc00",
+            "menu.selectionForeground": "#000000",
+            "menubar.selectionBackground": "#00cc00",
+            "menubar.selectionForeground": "#000000",
+            "menu.separatorBackground": "#99ff99",
+            "menu.background": "#000000",
+            "focusBorder": "#99ff99",
+            "button.background": "#99ff99",
+            "button.foreground": "#000000",
+            "selection.background": "#222222",
+            "icon.foreground": "#99ff99",
+            "sideBar.foreground": "#99ff99",
+            "sideBarSectionHeader.background": "#00cc00",
+            "sideBarSectionHeader.foreground": "#000000",
+            "tab.inactiveBackground": "#000000",
+            "tab.border": "#99ff99",
+            "tab.activeBorder": "#99ff00",
+            "tab.activeBackground": "#222222",
+            "tab.activeForeground": "#99ff99",
+            "tab.hoverBackground": "#000000",
+            "tab.hoverForeground": "#99ff99",
+            "editor.background": "#000000",
+            "editor.foreground": "#ffffff",
+            "editor.selectionBackground": "#333333",
+            "editorLineNumber.foreground": "#00cc00",
+            "panel.border": "#99ff99",
+            "scrollbarSlider.background": "#00cc00",
+            "panelTitle.activeForeground": "#80ff80",
+            "terminal.foreground": "#99ff99"
+		}
+    }
+}
