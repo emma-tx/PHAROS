@@ -1,0 +1,22 @@
+# Example docker-compose file for a Node.JS project. There is only one service here being composed.
+
+version: '2'
+services:
+  admin-web:
+    container_name: admin-web
+
+    # A docker-compose file should reference the location of where the compiled project is copied to.
+    # In this case, it's a Node.JS application, so only the project's root directory is used as the context.
+    build: 
+      context: .
+      dockerfile: Dockerfile_local
+    ports:
+      - "3000:3000"
+
+    # The environment variables are defined by the developer, and can include things like APIs keys, URIs for
+    # external services, etc.
+    environment:
+      - REACT_APP_GRAPHQL_KEY=
+      - REACT_APP_CLIENT_ID=
+      - REACT_APP_GRAPHQL_URL=[External service URI here]
+      - REACT_APP_ENDPOINT=http://localhost:3000/

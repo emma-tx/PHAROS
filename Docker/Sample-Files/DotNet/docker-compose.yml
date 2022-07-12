@@ -1,0 +1,66 @@
+# This is an example of a docker-compose.yml file for building an application that incorporates a .NET
+# service, a Microsoft SQL Server database and multiple Node.JS projects. 
+
+version: '3.4'
+
+# All services to be composed are defined here
+services:
+
+    # The .NET service. This uses the database server directly, so environment variables for that are
+    # included. It references the Dockerfil in this specific project, and the Dockerfile causes the DLLs of the
+    # solution to be placed in the /app directory - that directory must be specified here.
+    example.api:
+        image: ${DOCKER_REGISTRY-}exampleapi
+        environment:
+            - DB_NAME=exampledb
+            - DB_HOST=localhost
+            - DB_WRITE_USERNAME=sa
+            - DB_WRITE_PASSWORD=Example123
+            - DB_READ_USERNAME=sa
+            - DB_READ_PASSWORD=Example123
+        build:
+            context: .
+            dockerfile: Example.Api/Dockerfile
+        working_dir: /app
+        ports:
+            - "5000:80"
+            - "5001:443"
+        volumes:
+            - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+            - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+    # The database service. It uses the Microsoft SQL Server base image. After initialisation, it is populated
+    # with a local copy of a database stored in a Docker volume (example-datastore). Port 1577 is mapped to port
+    # 1433.
+    example.db:
+        image: mcr.microsoft.com/mssql/server
+        environment:
+            - SA_PASSWORD=Example123
+            - ACCEPT_EULA=Y
+        ports:
+            - "1577:1433"
+        volumes:
+            - example-datastore:/var/opt/mssql
+
+    # Reference to a Node.JS project. The Dockerfile for this exists in that project directory and should be
+    # executed when we run 'docker-compose'. We just need to specify the image name and port it's listening on.
+    example-graphql:
+        image: example-graphql_example-graphql
+        ports:
+            - 4000:4000
+
+    # Reference to a Node.JS project. The environment variables can include references to external services
+    # and API keys, if required. These variables are defined by the developer of this service.
+    example-admin:
+        image: example-admin_example-web
+        ports:
+            - "3000:3000"
+        environment:
+            - REACT_APP_GRAPHQL_KEY=
+            - REACT_APP_CLIENT_ID=
+            - REACT_APP_GRAPHQL_URL='[External GraphQL service URI here'
+            - REACT_APP_ENDPOINT=http://localhost:3000/
+
+# Any Docker volumes used must be referenced at the end of the docker-compose.yml file.
+volumes:
+    example-datastore:
