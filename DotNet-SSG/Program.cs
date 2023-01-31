@@ -27,10 +27,8 @@ namespace AzureSSGTest
             return templateMarkup;
         }
 
-        // Read current module listing from JSON returned by Vero API
         public static List<BlogListItem> GetsiteContentData()
         {
-            // Get blogposts data returned by Vero API and convert it into a queryable model.
             String jsonString = new StreamReader("blogposts.json").ReadToEnd();
             JObject extractedsiteContentData = JObject.Parse(jsonString);
             var model = JsonConvert.DeserializeObject<Root>(jsonString);
