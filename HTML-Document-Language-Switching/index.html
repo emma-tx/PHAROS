@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>HTML Document Language Switch</title>
+        <script src="jquery.min.js" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+	    <script>
+		    $(document).ready(function() {
+                var language = "cy";
+     		    $("html").attr("lang", language);
+                alert($("html").attr("lang"));
+		    }); 
+	</script>
+        This is a language test.
+    </body>
+</html>
