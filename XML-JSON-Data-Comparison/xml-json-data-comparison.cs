@@ -92,16 +92,11 @@ namespace RemoveDeadFiles
             };
             var client = new RestClient(restClientOptions);
 
-
             foreach (var i in fileList)
             {
                 string objectName = i.ToString();
-
                 var deleteObjectRequest = new RestRequest($"MyContainer/{objectName}", Method.Delete);
-
             }
-
-            //Return success to main()
 
             string fileNames = null;
             return (fileNames);
