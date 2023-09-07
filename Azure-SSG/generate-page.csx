@@ -10,8 +10,9 @@ using Site.Data.Models;
 
 public static async Task<IActionResult> Run(HttpRequest req, ILogger log)
 {
-    log.LogInformation("C# HTTP trigger function processed a request.");
+    log.LogInformation("C# HTTP trigger function received. Building page.");
 
+    // The request body here contains both the site data and template page HTML
     string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
     var sitePageData = GetSitePageData(requestBody);
     var updatedPageMarkup = GeneratePage(sitePageData, log);
@@ -32,6 +33,7 @@ public static string GeneratePage(Root model, ILogger log)
     List<string> tagsList = new List<string>();
     List<string> categoriesList = new List<string>();
 
+    // Generate HTML elements for each data type we want to render as a list or table row.
     if (model.post.authors?.Any() ?? false)
     {
         foreach (var i in model.post.authors)
@@ -55,7 +57,8 @@ public static string GeneratePage(Root model, ILogger log)
             categoriesList.Add("<td>" + i.category + "</td>" ?? "" + "</td>");
         }
     }
-           
+
+    // The string join is required to render list items as text.
     var authorsString = string.Join(" ", authorList);
     var tagsString = string.Join(" ", tagsList);
     var categoriesString = string.Join(" ", categoriesList);
@@ -69,6 +72,7 @@ public static string GeneratePage(Root model, ILogger log)
     return updatedHTML;
 }
 
+// Maps the JSON objects we want to use in the request body.
 public class Root
 {
     public Post post { get; set; }
